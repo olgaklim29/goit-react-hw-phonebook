@@ -16,6 +16,7 @@ export default function ContactList({ getVisibleContacts, deleteContact }) {
 }
 
 ContactList.propTypes = {
+  contacts: PropTypes.array,
   getVisibleContacts: PropTypes.func,
   deleteContact: PropTypes.func,
 };

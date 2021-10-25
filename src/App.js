@@ -17,6 +17,19 @@ class App extends Component {
     filter: "",
   };
 
+  componentDidMount() {
+    const parsedContacts = JSON.parse(localStorage.getItem("contacts"));
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
+    }
+  }
+
   getFormData = (data) => {
     if (
       this.state.contacts.some(
@@ -70,7 +83,7 @@ class App extends Component {
       <Container>
         <h1>Phonebook</h1>
         <Form getFormData={getFormData} />
-        <h2 className={s.contactsTitle}>Contacts &#128222;</h2>
+        <h2 className={s.contactsTitle}>Contacts</h2>
         <Filter value={filter} onChange={handleInputChange} />
         <ContactList
           contacts={contacts}
